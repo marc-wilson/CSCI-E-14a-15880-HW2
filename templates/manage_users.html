@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <main class="container add-user-section">
+        <div class="section-content">
+            <div class="form-style-8" style="width: auto;">
+                <h2>Manage Users</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">UID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <th scope="row">{{ user.uid }}</th>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td style="display: flex; flex-direction: row;">
+                            <a class="btn btn-primary" href="/edit-user/{{ user.uid }}">Edit</a>
+                            <form action="/delete-user/{{ user.uid }}" method="post">
+                                {{ form.submit(class="btn btn-danger btn-xl", value="Delete") }}
+                            </form>
+{#                            <a class="btn btn-danger" href="/delete-user/{{ user.uid }}">Delete</a>#}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}
